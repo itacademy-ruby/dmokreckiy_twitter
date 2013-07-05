@@ -1,12 +1,13 @@
 <h1>Users:</h1>
 
-<table  border="1px">
+<table class="table table-striped">
 <% @users.each do |user| %>
-  <tr>
+  <% count = user.microposts.count %>
+  <tr <%= count >= 3 ? 'class='"success" : '' %>>
     <td> <%= user.id %> </td>
     <td> <%= user.login %></td>
     <td> <%= user.email %> </td>
-    <td> <%= user.microposts.count %> </td>
+    <td> <%= count %> </td>
   </tr>
 <% end %>
 </table>
