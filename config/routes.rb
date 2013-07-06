@@ -1,4 +1,7 @@
 RandaalexTwitter::Application.routes.draw do
+  resources :microposts
+
+
   get "about" => "static_pages#about"
   get "help" => "static_pages#help"
 
