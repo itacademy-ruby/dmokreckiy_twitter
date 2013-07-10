@@ -1,0 +1,9 @@
+<% if current_user %>
+
+<li><%= link_to "#{current_user.email} - Sign out", signout_path %></li> 
+
+<% else %>
+
+<li><%= link_to "Sign in", signin_path %></li> 
+
+<% end %>

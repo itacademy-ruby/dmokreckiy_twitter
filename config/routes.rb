@@ -1,11 +1,16 @@
 RandaalexTwitter::Application.routes.draw do
   resources :microposts
 
-
   get "about" => "static_pages#about"
   get "help" => "static_pages#help"
 
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
+
+  get "signin" => 'sessions#new'
+  post "signin" => 'sessions#create'
+  get "signout" => 'sessions#destroy'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
