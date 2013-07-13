@@ -4,7 +4,11 @@ RandaalexTwitter::Application.routes.draw do
   get "about" => "static_pages#about"
   get "help" => "static_pages#help"
 
-  resources :users
+  resources :users do
+    member do 
+     post "follow"
+    end
+  end
   resources :sessions, :only => [:new, :create, :destroy]
 
   get "signin" => 'sessions#new'

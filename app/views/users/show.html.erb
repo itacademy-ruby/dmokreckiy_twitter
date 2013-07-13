@@ -1,3 +1,15 @@
+
+<div class="span3">
+  <div class="well sidebar-nav">
+    <%= render "following_form" %>
+
+  </div><!--/.well -->
+</div><!--/span-->
+
+<div class="container-fluid">
+<div class="row-fluid">
+
+<div class="span9">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -10,6 +22,18 @@
   <%= @user.login %>
 </p>
 
+  <h1>Microposts: </h1>
+
+    <% @user.microposts.each do |post| %>
+        <%= render :partial => "micropost", :locals => {:post => post} %>
+    <% end %>
+  </section>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+        </div>
+      </div><!--/row-->
+
+
+        </div>

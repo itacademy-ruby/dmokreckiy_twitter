@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  
+  def follow
+    # TODO: implement
+  end
+  
   # GET /users
   # GET /users.json
   def index

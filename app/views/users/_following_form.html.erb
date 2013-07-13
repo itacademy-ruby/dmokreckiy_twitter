@@ -1,0 +1,16 @@
+<%= form_for :following, :url => follow_user_path do |f| %>
+  <%= hidden_field_tag :followed_id, 123 %>
+
+  <% # TODO: implent follower and floowing counter block ^>
+  <% # TODO: refactoring needed. move to helper %>
+  <% if current_user.following?(@user)  %>
+    <% button_name = 'Unfollow' %>
+    <% button_class = 'btn btn-danger' %>
+  <% else %>
+    <% button_name = 'Follow' %>
+    <% button_class = 'btn btn-success' %>
+  <% end %>
+
+  <%= f.submit button_name, class: button_class %>
+
+<% end %>
