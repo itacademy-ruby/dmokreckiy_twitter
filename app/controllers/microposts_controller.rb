@@ -2,7 +2,8 @@ class MicropostsController < ApplicationController
   # GET /microposts
   # GET /microposts.json
   def index
-    @microposts = Micropost.all
+    @micropost = Micropost.new
+    @microposts = current_user.followers_microposts
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,11 +42,12 @@ class MicropostsController < ApplicationController
   # POST /microposts.json
   def create
     @micropost = Micropost.new(params[:micropost])
+    @micropost.user_id = current_user.id
 
     respond_to do |format|
       if @micropost.save
-        format.html { redirect_to @micropost, notice: 'Micropost was successfully created.' }
-        format.json { render json: @micropost, status: :created, location: @micropost }
+        format.html { redirect_to microposts_path, notice: 'Micropost was successfully created.' }
+        format.json { render json: microposts, status: :created, location: @micropost }
       else
         format.html { render action: "new" }
         format.json { render json: @micropost.errors, status: :unprocessable_entity }

@@ -1,13 +1,15 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :login, :password
 
-  has_many :microposts
+  has_many :microposts, :dependent => :destroy
 
   has_many :relationships, 
-    :foreign_key => "follower_id"
+    :foreign_key => "follower_id",
+    :dependent => :destroy
   has_many :reverse_relationships, 
     :foreign_key => "followed_id", 
-    :class_name => 'Relationship'
+    :class_name => 'Relationship',
+    :dependent => :destroy
   
   has_many :followed_users, 
     :through => :relationships, 
@@ -34,6 +36,15 @@ class User < ActiveRecord::Base
 
   def password_valid?(password)
     self.password == crypt_password(password)
+  end
+
+  def followers_microposts
+    followers_id_relation = Relationship.select('follower_id').where(:followed_id => self.id)
+    followers_id = followers_id_relation.map do |user|
+       user.follower_id
+    end
+
+    Micropost.where("user_id IN (#{followers_id.join(', ')}) OR user_id = #{self.id}").order("created_at DESC")
   end
 
   private
