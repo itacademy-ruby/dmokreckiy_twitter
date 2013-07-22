@@ -4,7 +4,7 @@ gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'rb-readline', '~> 0.4.2'
 gem 'sqlite3'
 # gem 'mysql2'
 
