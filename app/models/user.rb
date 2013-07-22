@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :login, :password
 
+  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
   has_many :microposts, :dependent => :destroy
 
   has_many :relationships, 
@@ -19,6 +21,7 @@ class User < ActiveRecord::Base
     :source => :follower
 
   validates :login, :length => {:minimum => 5}
+  validates :email, presence: true, format: { with: EMAIL_REGEX }, uniqueness: true { case_sensitive: false }
   
   before_save :update_password
 
